@@ -15,6 +15,8 @@ app.output = function () {
         holder += "<td>" + app.bands[i].name + "</td>";
         holder += "<td>" + app.bands[i].song + "</td>";
         holder += "<td>" + app.bands[i].year + "</td>";
+        holder += "<td><button class='btn btn-warning' onclick='app.edit(" + i + ")'>Edit</button>&nbsp;";
+        holder += "<button class='btn btn-danger' onclick='app.delete(" + i + ")'>Delete</button></ td>";
         holder += "</ tr>";
     }
     document.getElementById("output").innerHTML = holder;
@@ -74,11 +76,54 @@ app.read = function () {
     request.send()
 
 };
-app.edit = function () {
+app.edit = function (index) {
+    document.getElementById("edit-name").value = app.bands[index].name;
+    document.getElementById("edit-song").value = app.bands[index].song;
+    document.getElementById("edit-year").value = app.bands[index].year;
+    document.getElementById("index").value = index;
+    $('#edit-modal').modal('show');
+};
+app.save = function () {
+    var name = document.getElementById("edit-name").value;
+    var song = document.getElementById("edit-song").value;
+    var year = document.getElementById("edit-year").value;
+    var index = document.getElementById("index").value;
+    var band = new app.Band(name, song, year);
+    band.key = app.bands[index].key;
+    var request = new XMLHttpRequest();
+    request.open("PUT", app.url + app.bands[index].key + ".json");
+    request.onload = function () {
+        if (this.status >= 200 && this.status < 400) {
+            app.bands[index] = band;
+            app.output();
 
+        } else {
+            console.log("erroe on put");
+        }
+    }
+    request.onerror = function () {
+        console.log("comm error");
+    };
+    request.send(JSON.stringify(band));
+    $('#edit-modal').modal('hide');
 
 };
-app.save = function () { };
-app.delete = function () { };
+app.delete = function (index) {
+    
+    var request = new XMLHttpRequest();
+    request.open("DELETE", app.url + app.bands[index].key + ".json");
+    request.onload = function () {
+        if (this.status >= 200 && this.status < 400) {
+            app.bands.splice(index, 1);
+            app.output();
+        } else {
+            console.log("Error on Delete");
+        };
+    }
+    request.onerror = function () {
+        console.log("comm erroer");
+        }
+    request.send();
+};
 
 app.read();
