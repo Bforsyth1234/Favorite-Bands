@@ -74,7 +74,10 @@ app.read = function () {
     request.send()
 
 };
-app.edit = function () { };
+app.edit = function () {
+
+
+};
 app.save = function () { };
 app.delete = function () { };
 
