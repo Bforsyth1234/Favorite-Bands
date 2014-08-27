@@ -1,0 +1,6 @@
+c:\users\brooks\documents\visual studio 2013\Projects\Day8\Day8\bin\Day8.dll.config
+c:\users\brooks\documents\visual studio 2013\Projects\Day8\Day8\bin\Day8.dll
+c:\users\brooks\documents\visual studio 2013\Projects\Day8\Day8\bin\Day8.pdb
+c:\users\brooks\documents\visual studio 2013\Projects\Day8\Day8\obj\Debug\Day8.csprojResolveAssemblyReference.cache
+c:\users\brooks\documents\visual studio 2013\Projects\Day8\Day8\obj\Debug\Day8.dll
+c:\users\brooks\documents\visual studio 2013\Projects\Day8\Day8\obj\Debug\Day8.pdb
